@@ -53,7 +53,7 @@ $pages = get_pages($args); ?>
 
 <?php foreach($pages as $page): ?>
 
-<li><a href="<?php get_page_link( $page->ID ); ?>">
+<li><a href="<?php echo get_page_link( $page->ID ); ?>">
   <?php echo $page->post_title; ?></a>
 </li>
 
