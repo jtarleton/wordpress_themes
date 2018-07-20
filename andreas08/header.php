@@ -455,14 +455,36 @@ h4 {
 </div>
 <div id="nnavigation">
 <ul style="margin:0;">
-<li class="selected"><a href="ind.php?action=welcome">Home</a></li>
-<li><a href="ind.php?action=projects">Projects</a></li>
-<li><a href="ind.php?action=client">Client</a></li>
-<li><a href="ind.php?action=server">Server</a></li>
-<li><a href="ind.php?action=archive">Archive</a></li>
-<li><a href="ind.php?action=about">About</a></li>
-<li><a href="ind.php?action=weather">Weather</a></li>
-<li><a href="ind.php?action=login">Login</a></li>
+<li class="selected"><a href="<?php echo home_url(); ?>">Home</a></li>
+
+<?php
+$args = array(
+  'sort_order' => 'asc',
+  'sort_column' => 'post_title',
+  'hierarchical' => 1,
+  'exclude' => '',
+  'include' => '',
+  'meta_key' => '',
+  'meta_value' => '',
+  'authors' => '',
+  'child_of' => 0,
+  'parent' => -1,
+  'exclude_tree' => '',
+  'number' => '',
+  'offset' => 0,
+  'post_type' => 'page',
+  'post_status' => 'publish'
+); 
+$pages = get_pages($args); ?>
+
+<?php foreach($pages as $page): ?>
+
+<li><a href="<?php get_page_link( $page->ID ); ?>">
+  <?php echo $page->post_title; ?></a>
+</li>
+
+<?php endforeach; ?>
+<li><a href="<?php echo wp_login_url(); ?>">Login</a></li>
 </ul>
 <div style="padding-right:10px; text-align:right;"><?php 
 $dt = new DateTime('now', new DateTimeZone('America/New_York'));
